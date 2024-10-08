@@ -23,18 +23,23 @@
 
 // module.exports = pool
 
+// // Carregar o dotenv para acessar variáveis de ambiente
+require('dotenv').config();
+
 const mysql = require('mysql2');
 
+// Criar um pool de conexões usando variáveis de ambiente
 const pool = mysql.createPool({
-  host: process.env.BHOST || '200.9.22.2', // Usa a variável de ambiente, se definida, ou um valor padrão
-  user: process.env.DB_USER || 'senai-dev',
-  password: process.env.DB_PASSWORD || 'mensagemapagada99',
-  database: process.env.DB_DATABASE || 'senai-dev',
+  host: process.env.BHOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD, 
+  database: process.env.DB_DATABASE,
   waitForConnections: true,   // Espera por conexões disponíveis
   connectionLimit: 10,        // Limite máximo de conexões no pool
   queueLimit: 0               // Número máximo de conexões em espera (0 = ilimitado)
 });
 
+// Testar a conexão com o banco de dados
 pool.getConnection((err, connection) => {
   if (err) {
     console.error('Error connecting: ' + err.stack);
@@ -46,5 +51,5 @@ pool.getConnection((err, connection) => {
   connection.release();
 });
 
+// Exportar o pool para uso em outras partes do aplicativo
 module.exports = pool;
-
