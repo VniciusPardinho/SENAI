@@ -30,17 +30,10 @@ const mysql = require('mysql2');
 
 // Criar um pool de conexões usando variáveis de ambiente
 const pool = mysql.createPool({
-<<<<<<< HEAD
   host: process.env.BHOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD, 
   database: process.env.DB_DATABASE,
-=======
-  host: process.env.BHOST || '200.9.22.2', // Usa a variável de ambiente, se definida, ou um valor padrão
-  user: process.env.DB_USER || 'senai-dev',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_DATABASE || '',
->>>>>>> 2841dcc162217ec3e14344b83fd54eb7ec682a7f
   waitForConnections: true,   // Espera por conexões disponíveis
   connectionLimit: 10,        // Limite máximo de conexões no pool
   queueLimit: 0               // Número máximo de conexões em espera (0 = ilimitado)
